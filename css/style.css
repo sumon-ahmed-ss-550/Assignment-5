@@ -1,0 +1,8 @@
+html {
+  background-color: #f8fafc;
+}
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+
+.geist-font {
+  font-family: "Geist", sans-serif;
+}
