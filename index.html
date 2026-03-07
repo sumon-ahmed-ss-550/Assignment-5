@@ -40,31 +40,48 @@
         </div>
 
         <!-- form -->
-        <form action="" class="mb-6">
+        <form id="loginForm" action="" class="mb-6">
           <div class="space-y-4 mb-6">
             <div class="space-y-2">
               <label class="font-medium text-[16px] text-[#1F2937]" for=""
                 >Username</label
               >
-              <input
-                class="w-full p-4 rounded-lg border-[#E4E4E7] font-normal text-base leading-4 text-[#64748B]"
-                type="text"
-                placeholder="Enter Username"
-              />
+              <div>
+                <input
+                  id="name"
+                  class="w-full p-4 rounded-lg border-[#E4E4E7] font-normal text-base leading-4 text-[#64748B] mb-2"
+                  type="text"
+                  placeholder="Enter Username"
+                  required
+                />
+                <span id="nameSpan" class="font-normal text-sm text-[#4A00FF]"
+                  >Default: admin</span
+                >
+              </div>
             </div>
 
             <div class="space-y-2">
               <label class="font-medium text-[16px] text-[#1F2937]" for=""
                 >Password</label
               >
-              <input
-                class="w-full p-4 rounded-lg border-[#E4E4E7] font-normal text-base leading-4 text-[#64748B]"
-                type="password"
-                placeholder="Enter Password"
-              />
+              <div>
+                <input
+                  id="password"
+                  class="w-full p-4 rounded-lg border-[#E4E4E7] font-normal text-base leading-4 text-[#64748B] mb-2"
+                  type="password"
+                  placeholder="Enter Password"
+                  required
+                />
+                <span id="passSpan" class="font-normal text-sm text-[#4A00FF]"
+                  >Default: admin123</span
+                >
+              </div>
             </div>
           </div>
-          <button class="w-full btn btn-primary font-semibold text-base p-4">
+          <button
+            type="submit"
+            class="w-full btn btn-primary font-semibold text-base p-4"
+          >
             Sign In
           </button>
         </form>
