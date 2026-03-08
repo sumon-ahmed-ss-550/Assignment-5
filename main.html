@@ -14,11 +14,27 @@
       type="text/css"
     />
     <!-- css link -->
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style2.css" />
   </head>
 
-  <body class="geist-font">
-    <h1>This is header</h1>
+  <body>
+    <header class="bg-base-100 shadow-sm">
+      <div
+        class="max-w-[1440px] mx-auto px-4 py-5 md:flex justify-between items-center"
+      >
+        <div class="flex justify-center items-center gap-2 mb-4 md:mb-0">
+          <img class="w-9" src="./assets/github-logo.png" alt="" />
+          <span class="font-semibold text-2xl text-[#1F2937]"
+            >GitHub Issues Tracker</span
+          >
+        </div>
+
+        <form action="" class="flex justify-center items-center gap-4">
+          <input type="search" placeholder="Search issues..." class="input" />
+          <button type="submit" class="btn btn-primary">New Issue</button>
+        </form>
+      </div>
+    </header>
 
     <!-- font awesome link -->
     <script src="./js/all.min.js"></script>
