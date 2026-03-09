@@ -1,11 +1,8 @@
-// Full page Loading Spinner
-
+// full page
 let currentStatus = "all-btn";
-
 window.addEventListener("load", () => {
   const spinner = document.getElementById("spinner-container");
   const content = document.querySelectorAll(".spin");
-
   setTimeout(() => {
     spinner.classList.add("hidden");
     content.forEach((el) => {
@@ -16,8 +13,7 @@ window.addEventListener("load", () => {
   allIssue();
 });
 
-// All issue
-
+// all issues
 const allIssue = async () => {
   document.getElementById("card-container").innerHTML =
     `<div class="col-span-full mx-auto"><span class="loading loading-spinner loading-xl"></span></div>`;
@@ -36,11 +32,104 @@ const allIssue = async () => {
   }
 };
 
-// generateLabels
+// single level
+const singleIssue = async (id) => {
+  const modal = document.getElementById("display_modal");
+  modal.showModal();
 
+  const modalContent = modal.querySelector(".modal-box");
+  modal.innerHTML = `
+    <div class="modal-box">
+      <div class="flex justify-center p-10">
+        <span class="loading loading-spinner loading-xl"></span>
+      </div>
+    </div>
+  `;
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const singleData = data.data;
+
+    modalDisplay(singleData);
+  } catch (error) {
+    const modal = document.getElementById("display_modal");
+    modal.innerHTML = `
+      <div class="modal-box">
+        <p class='text-red-500 text-center p-10'>Failed to Load Modal</p>
+        <form method="dialog" class="flex justify-end">
+          <button class="btn btn-primary">Close</button>
+        </form>
+      </div>
+    `;
+  }
+};
+
+// card
+const modalDisplay = (issue) => {
+  const modalContainer = document.getElementById("display_modal");
+  console.log(issue);
+  const modalHTML = `
+   <div class="modal-box">
+        <div class="modal-action">
+          <div class="w-fit rounded-xl">
+            <div class="">
+              <h1 class="text-2xl font-bold text-[#1F2937] mb-2">
+                Opened ${issue.title}
+              </h1>
+              <div class="flex gap-5 mb-6">
+                <p
+                  class="bg-[#00A96E] px-3 py-1 text-white text-[14px] rounded-full mr-2"
+                >
+                   ${issue.status === "open" ? "Open" : "Closed"}
+                </p>
+                <ul class="flex gap-5 items-center">
+                  <li class="list-disc mr-2 text-[12px] text-[#64748B]">
+                    Opened by ${issue.assignee}
+                  </li>
+                  <li class="list-disc text-[12px] text-[#64748B]">
+                    ${new Date(issue.createdAt).toLocaleDateString()}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="flex gap-1">
+              <div class="flex mb-3">
+                ${generateLabels(issue.labels)}
+              </div>
+             
+            </div>
+            <div class="mb-6">
+              <p class="text-[14px] mb-3 text-[#64748B]">
+                ${issue.description}
+              </p>
+            </div>
+            <div class="flex justify-between p-4 mb-6">
+              <div class="">
+                <p>Assignee</p>
+                <h1>${issue.assignee}</h1>
+              </div>
+              <div class="">
+                <p>Priority</p>
+                <div>
+                ${priorityBgChange(issue.priority)}
+                </div>
+              </div>
+            </div>
+            <form method="dialog" class="flex justify-end">
+              <button class="btn btn-primary focus:outline-none">Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+   
+   `;
+  modalContainer.innerHTML = modalHTML;
+};
+
+// display level
 const generateLabels = (labels) => {
   if (!labels || labels.length === 0) return "";
-
   return labels
     .map((label) => {
       if (label === "bug") {
@@ -59,13 +148,20 @@ const generateLabels = (labels) => {
     })
     .join("");
 };
+const priorityBgChange = (priority) => {
+  if (priority === "medium") {
+    return `<h1 class="text-[12px] w-16 bg-[#FFF6D1] text-[#F59E0B] text-center font-medium rounded-full">Medium</h1>`;
+  } else if (priority === "low") {
+    return `<h1 class="text-[12px] w-16 bg-[#EEEFF2] text-[#9CA3AF] text-center font-medium rounded-full">Low</h1>`;
+  } else if (priority === "high") {
+    return `<h1 class="text-[12px] w-16 bg-[#FEECEC] text-[#EF4444] text-center font-medium rounded-full">High</h1>`;
+  }
+};
 
-// Display all Issue
-
+// all display issues
 const allIssueDisplay = (issue) => {
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
-
   document.getElementById("all-issue").innerText = issue.length;
   document.getElementById("open-count").innerText = issue.filter(
     (i) => i.status === "open",
@@ -73,12 +169,10 @@ const allIssueDisplay = (issue) => {
   document.getElementById("closed-count").innerText = issue.filter(
     (i) => i.status === "closed",
   ).length;
-
   issue.forEach((cardDetails) => {
     const card = document.createElement("div");
 
-    console.log(cardDetails.status);
-
+    // show modal on display
     if (cardDetails.status === "open") {
       card.className =
         "hover:scale-102 hover:-translate-y-2 transition-all duration-400 cursor-pointer rounded-t-lg border-t-4 border-[#00A96E]";
@@ -94,31 +188,8 @@ const allIssueDisplay = (issue) => {
         return `<img src="./assets/Closed.png" alt="">`;
       }
     };
-
-    const priorityBgChange = () => {
-      if (cardDetails.priority === "medium") {
-        return `<h1
-                    class="text-[12px] w-16 bg-[#FFF6D1] text-[#F59E0B] text-center font-medium rounded-full"
-                  >
-                    Medium
-                  </h1>`;
-      } else if (cardDetails.priority === "low") {
-        return `<h1
-                    class="text-[12px] w-16 bg-[#EEEFF2] text-[#9CA3AF] text-center font-medium rounded-full"
-                  >
-                    Low
-                  </h1>`;
-      } else if (cardDetails.priority === "high") {
-        return `<h1
-                    class="text-[12px] w-16 bg-[#FEECEC] text-[#EF4444] text-center font-medium rounded-full"
-                  >
-                    High
-                  </h1>`;
-      }
-    };
-
     card.innerHTML = `
-<div onclick="my_modal_1.showModal()" class="w-[370px] sm:w-[250px] px-3 sm:px-0 ">
+                   <div onclick="singleIssue(${cardDetails.id})" class="w-[370px] sm:w-[250px] px-3 sm:px-0 ">
   
   
             <div class="rounded-t-md  h-[200px] bg-white shadow-md p-4">
@@ -148,7 +219,7 @@ const allIssueDisplay = (issue) => {
                     ${generateLabels(cardDetails.labels)}
 
                 </div>
-              
+    
               </div>
             </div>
             <div class="rounded-b-md bg-white mt-0.5 shadow-md p-4">
@@ -162,27 +233,20 @@ const allIssueDisplay = (issue) => {
   });
 };
 
-// get all btn
+// btn group
 const btnAllIssue = document.getElementById("all-btn");
 const openBtn = document.getElementById("open-btn");
 const closedBtn = document.getElementById("closed-btn");
 
-// Toggle Btn
-
+// toggler btn
 const toggleBtn = (id) => {
   currentStatus = id;
-
   const allCountDiv = document.getElementById("all-issue");
   const openCountDiv = document.getElementById("open-count");
   const closedCountDiv = document.getElementById("closed-count");
-
   const allBtnGet = [btnAllIssue, openBtn, closedBtn];
-
   allBtnGet.forEach((btn) => {
     btn.classList.remove("active-btn", "inactive-btn");
-
-    // check btn
-
     if (btn.id === id) {
       btn.classList.add("active-btn"); //add style class
       btn.classList.remove("inactive-btn"); //remove style class
@@ -192,8 +256,7 @@ const toggleBtn = (id) => {
     }
   });
 
-  // Show and Hide Issue Count
-
+  // issue content
   if (id === "all-btn") {
     allCountDiv.classList.remove("hidden");
     openCountDiv.classList.add("hidden");
@@ -207,21 +270,18 @@ const toggleBtn = (id) => {
     openCountDiv.classList.add("hidden");
     closedCountDiv.classList.remove("hidden");
   }
-
   filterIssues(id);
 };
 
+// date filtering
 const filterIssues = async (filterType) => {
   document.getElementById("card-container").innerHTML =
     `<div class="col-span-full mx-auto"><span class="loading loading-spinner loading-xl"></span></div>`;
-
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
-
   try {
     const res = await fetch(url);
     const data = await res.json();
     let filteredData = data.data;
-
     if (filterType === "open-btn") {
       filteredData = data.data.filter((issue) => issue.status === "open");
     } else if (filterType === "closed-btn") {
@@ -237,7 +297,6 @@ const filterIssues = async (filterType) => {
 const searchItemInApi = async () => {
   const searchValue = document.getElementById("input-search");
   const searchItem = searchValue.value.trim();
-
   if (searchItem === "") {
     allIssue();
     return;
@@ -246,13 +305,10 @@ const searchItemInApi = async () => {
     `<div class="col-span-full mx-auto"><span class="loading loading-spinner loading-xl"></span></div>`;
 
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchItem}`;
-
   try {
     const res = await fetch(url);
     const data = await res.json();
-
     const searchResults = data.data || [];
-
     if (searchResults.length === 0) {
       document.getElementById("card-container").innerHTML =
         `<p class='text-gray-500 text-xl col-span-full text-center'>No issues found for "${searchItem}"</p>`;

@@ -3,48 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Font Awesome CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
-    <!-- Daisy and Tailwind CDN  -->
+    <title>GitHub Issue Tracker</title>
+    <!-- font awesome link -->
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/fontawesome.min.css" />
+    <!-- daisyUi link  -->
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5"
       rel="stylesheet"
       type="text/css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <!-- Google Font  -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Project Title -->
-    <title>GitHub Issue Tracker</title>
-
-    <!-- Internal Css  -->
-    <style>
-      * {
-        font-family: "Geist", sans-serif;
-      }
-    </style>
+    <!-- css link -->
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body class="bg-[#F8FAFC] lg:pt-20 lg:w-[743px] mx-auto">
-    <!-- Main Section  -->
-    <main
-      class="max-w-[520px] rounded-lg bg-white lg:shadow-lg lg:p-6 mx-auto "
-    >
-      <div class="">
+
+  <body class="lg:pt-20 lg:w-[743px] mx-auto">
+    <!-- main section -->
+    <main class="max-w-[520px] rounded-lg bg-white lg:shadow-lg lg:p-6 mx-auto">
+      <!-- top area -->
+      <div>
         <div class="flex justify-center items-center">
           <img src="./assets/github-logo.png" alt="" />
         </div>
@@ -55,26 +32,34 @@
           <p class="text-base text-[#64748B]">Sign in to manage your issues</p>
         </div>
       </div>
+
+      <!-- center area -->
       <div class="mx-auto">
         <div class="card-body flex justify-center">
           <fieldset class="fieldset">
             <label class="label text-base">Username</label>
-            <input
-              id="input-user-name"
-              type="text"
-              class="input w-full focus:outline-none focus:border-neutral-500"
-              placeholder="Enter Username"
-            />
-            <div><p class="text-[14px] text-[#4A00FF]">Default: admin</p></div>
-            <label class="label text-base">Password</label>
-            <input
-              id="input-password"
-              type="password"
-              class="input w-full focus:outline-none focus:border-neutral-500"
-              placeholder="Enter Password"
-            />
             <div>
-              <p class="text-[14px] text-[#4A00FF]">Default: admin123</p>
+              <input
+                id="input-user-name"
+                type="text"
+                class="input w-full focus:outline-none focus:border-neutral-500"
+                placeholder="Enter Username"
+              />
+              <p id="defaultUser" class="text-[14px] text-[#4A00FF]">
+                Default: admin
+              </p>
+            </div>
+            <label class="label text-base">Password</label>
+            <div>
+              <input
+                id="input-password"
+                type="password"
+                class="input w-full focus:outline-none focus:border-neutral-500"
+                placeholder="Enter Password"
+              />
+              <p id="defaultPass" class="text-[14px] text-[#4A00FF]">
+                Default: admin123
+              </p>
             </div>
             <button id="sign-in-btn" class="btn btn-primary mt-4">
               Sign In
@@ -82,19 +67,30 @@
           </fieldset>
         </div>
       </div>
-      <div class="text-center mb-6">
-        <p class="text-base text-[#1F2937]">OR</p>
-      </div>
-      <div class="text-center mb-2">
-        <p class="text-[14px] text-[#64748B]">Demo Credentials:</p>
-      </div>
-      <div class="text-center p-6">
-        <p class="text-base text-[#1F2937]">Username: admin</p>
-        <p class="text-base text-[#1F2937]">Password: admin123</p>
+
+      <!-- bottom area -->
+      <div>
+        <div class="text-center mb-6">
+          <p class="text-base text-[#1F2937]">OR</p>
+        </div>
+
+        <div class="text-center mb-2">
+          <p class="text-[14px] text-[#64748B]">Demo Credentials:</p>
+        </div>
+
+        <div class="text-center p-6 bg-[#F8FAFC] rounded-lg">
+          <p class="text-base text-[#1F2937]">Username: admin</p>
+          <p class="text-base text-[#1F2937]">Password: admin123</p>
+        </div>
       </div>
     </main>
 
-    <!-- Js -->
+    <!-- font awesome link -->
+    <script src="./scripts/all.min.js"></script>
+    <script src="./scripts/fontawesome.min.js"></script>
+    <!-- tailwindcss link -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Js link -->
     <script src="./scripts/loginForm.js"></script>
   </body>
 </html>

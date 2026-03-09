@@ -1,5 +1,4 @@
-// Add EventListener in Sign in Btn
-
+// assign home page
 document.getElementById("sign-in-btn").addEventListener("click", (event) => {
   event.preventDefault();
   const inputUserName = document
@@ -19,5 +18,30 @@ document.getElementById("sign-in-btn").addEventListener("click", (event) => {
     } else if (inputPassword !== validPassword) {
       alert("Invalid Password");
     }
+  }
+});
+
+// hidden default username and password
+// hidden user name
+const inputUser = document.getElementById("input-user-name");
+const defaultUser = document.getElementById("defaultUser");
+
+inputUser.addEventListener("input", () => {
+  if (inputUser.value.trim().toLowerCase() === "admin") {
+    defaultUser.style.display = "none";
+  } else {
+    defaultUser.style.display = "block";
+  }
+});
+
+// hidden password
+const inputPassword = document.getElementById("input-password");
+const defaultPass = document.getElementById("defaultPass");
+
+inputPassword.addEventListener("input", () => {
+  if (inputPassword.value.trim().toLowerCase() === "admin123") {
+    defaultPass.style.display = "none";
+  } else {
+    defaultPass.style.display = "block";
   }
 });

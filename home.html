@@ -3,124 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Font Awesome CDN -->
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
-    <!-- Daisy and Tailwind CDN  -->
-
+    <title>GitHub Issue Tracker</title>
+    <!-- font awesome link -->
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/fontawesome.min.css" />
+    <!-- daisyUi link  -->
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5"
       rel="stylesheet"
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <!-- Google Font  -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Project Title -->
-
-    <title>GitHub Issue Tracker</title>
-
-    <!-- Internal Css  -->
-
-    <style>
-      * {
-        font-family: "Geist", sans-serif;
-      }
-
-      .active-btn {
-        background: #4a00ff !important;
-        color: white !important;
-        border: none !important;
-        transition: all 0.5s ease;
-      }
-      .inactive-btn {
-        background: #e4e4e7 !important;
-        color: #64748b !important;
-        border: none !important;
-        transition: all 0.5s ease;
-      }
-      .active-btn:hover {
-        background: #3407a7 !important;
-        color: white !important;
-        transform: translateY(-2px) scale(1.03);
-      }
-
-      .inactive-btn:hover {
-        background: #ceced1 !important;
-        color: #64748b !important;
-        transform: translateY(-2px) scale(1.03);
-      }
-      input[type="search"] {
-        background-image: url("./assets/mag.png");
-        background-repeat: no-repeat;
-        background-position: 10px 50%;
-        padding-left: 30px;
-      }
-    </style>
-
+    <!-- css link -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <style></style>
   </head>
+
   <body class="bg-[#F8FAFC]">
     <!-- Header Section  -->
 
     <header class="invisible spin">
-      <div class="navbar bg-base-100 shadow-sm lg:px-20">
-        <div class="flex-1">
+      <div class="navbar flex-col md:flex-row bg-base-100 shadow-sm lg:px-20">
+        <div class="flex-1 mb-6 md:mb-0">
           <div class="flex gap-1 items-center">
-            <img
-              src="./assets/github-logo.png"
-              alt=""
-              class="w-9 hidden md:block"
-            />
-            <a class="text-base md:text-xl lg:text-2xl font-bold text-[#1F2937]"
+            <img src="./assets/github-logo.png" alt="" class="w-9" />
+            <a class="text-[18px] font-bold text-[#1F2937]"
               >GitHub Issues Tracker</a
             >
           </div>
         </div>
-        <div class="flex gap-2">
-          <div class="join">
+
+        <div class="flex">
+          <div class="join gap-2">
             <input
               id="input-search"
               type="search"
               placeholder="Search"
-              class="input input-bordered focus:outline-none rounded-l-sm focus:border-purple-700 w-24 md:w-auto hidden md:block"
+              class="input input-bordered focus:outline-none rounded focus:border-purple-700 w-full md:w-auto"
             />
-            <button
-              onclick="searchItemInApi()"
-              class="btn btn-primary rounded-r-sm"
-            >
+            <button onclick="searchItemInApi()" class="btn btn-primary rounded">
               <i class="fa-solid fa-plus"></i>New Issue
             </button>
           </div>
-          <div class="dropdown dropdown-end md:hidden">
+
+          <!-- <div class="dropdown dropdown-end">
             <div
               tabindex="0"
               role="button"
               class="btn btn-ghost btn-circle avatar"
             >
               <div class="w-10 rounded-full flex items-center justify-center">
-                <img
-                  src="./assets/github-logo.png"
-                  alt=""
-                  class="w-8 overflow-x-visible"
-                />
+                <button class="btn btn-ghost btn-circle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
+
             <ul
               tabindex="-1"
               class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
@@ -131,13 +82,12 @@
                 class="input focus:border-purple-700 rounded-sm input-bordered focus:outline-none w-24 w-full"
               />
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
     </header>
 
     <!-- Main Section  -->
-
     <main
       class="w-full sm:px-6 lg:w-[1110px] lg:px-0 mx-auto mt-4 sm:mt-[60px] invisible spin"
     >
@@ -183,11 +133,22 @@
           </div>
           <div class="">
             <div class="flex items-center gap-2">
-              <span class="" data-id="all-count-div" id="all-issue">0</span>
-              <span class="hidden" data-id="open-count-div" id="open-count"
+              <span
+                class="text-xl font-semibold text-[#1F2937]"
+                data-id="all-count-div"
+                id="all-issue"
                 >0</span
               >
-              <span class="hidden" data-id="closed-count-div" id="closed-count"
+              <span
+                class="hidden text-xl font-semibold text-[#1F2937]"
+                data-id="open-count-div"
+                id="open-count"
+                >0</span
+              >
+              <span
+                class="hidden text-xl font-semibold text-[#1F2937]"
+                data-id="closed-count-div"
+                id="closed-count"
                 >0</span
               >
               <h1 class="text-xl font-semibold text-[#1F2937]">Issues</h1>
@@ -210,100 +171,35 @@
           </div>
         </div>
       </section>
-
       <!-- Card section  -->
 
       <section class="p-4 sm:p-6 bg-[#fbfbfbd9] w-full mx-auto shadow-md">
         <div
           id="card-container"
           class="grid grid-cols-1 mx-auto justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
-        >
-        
-      </div>
+        ></div>
       </section>
     </main>
 
-    <!-- loading spinner  -->
-
-    <div id="spinner-container" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <!-- spinner -->
+    <div
+      id="spinner-container"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+    >
       <span class="loading loading-spinner loading-xl"></span>
     </div>
 
-    <!-- Modal section  -->
+    <!-- modal -->
+    <dialog id="display_modal" data-id="Modal-container" class="modal"></dialog>
 
-    <!-- Open the modal using ID.showModal() method -->
-    <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
-
-    <dialog id="my_modal_1" class="modal">
-      <div class="modal-box">
-        <div class="modal-action">
-          <div class="w-fit rounded-xl">
-            <div class="">
-              <h1 class="text-2xl font-bold text-[#1F2937] mb-2">
-                Fix broken image uploads
-              </h1>
-              <div class="flex gap-5 mb-6">
-                <p
-                  class="bg-[#00A96E] px-3 py-1 text-white text-[14px] rounded-full mr-2"
-                >
-                  Opened
-                </p>
-                <ul class="flex gap-5 items-center">
-                  <li class="list-disc mr-2 text-[12px] text-[#64748B]">
-                    Opened by Fahim Ahmed
-                  </li>
-                  <li class="list-disc text-[12px] text-[#64748B]">
-                    22/02/2026
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="flex gap-1 mb-6">
-              <div class="">
-                <p
-                  class="text-[#EF4444] text-[12px] font-medium rounded-full px-2 border-2 border-[#FECACA]"
-                >
-                  <i class="fa-solid fa-bug"></i> BUG
-                </p>
-              </div>
-              <div
-                class="border-2 border-[#FDE68A] rounded-full px-2 font-medium text-[12px]"
-              >
-                HELP WANTED
-              </div>
-            </div>
-            <div class="mb-6">
-              <p class="text-[14px] mb-3 text-[#64748B]">
-                The navigation menu doesn't collapse properly on mobile devices.
-                Need to fix the responsive behavior.
-              </p>
-            </div>
-            <div class="flex justify-between p-4 mb-6">
-              <div class="">
-                <p>Assignee</p>
-                <h1>Fahim Ahmed</h1>
-              </div>
-              <div class="">
-                <p>Priority</p>
-                <h1
-                  class="text-[12px] w-16 bg-amber-200 text-center font-medium rounded-full"
-                >
-                  HIGH
-                </h1>
-              </div>
-            </div>
-            <form method="dialog" class="flex justify-end">
-              <button class="btn btn-primary focus:outline-none">Close</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </dialog>
-
-    <!-- Footer Section  -->
-
+    <!-- footer-->
     <footer class="invisible spin"></footer>
 
+    <!-- font awesome link -->
+    <script src="./scripts/all.min.js"></script>
+    <script src="./scripts/fontawesome.min.js"></script>
+    <!-- tailwindcss link -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Js -->
     <script src="./scripts/dasboard.js"></script>
   </body>

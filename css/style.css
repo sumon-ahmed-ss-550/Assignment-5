@@ -1,3 +1,41 @@
+/* home page style */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 * {
   font-family: "Geist", sans-serif;
+}
+html {
+  background-color: #f8fafc;
+}
+
+/* assign page style */
+* {
+  font-family: "Geist", sans-serif;
+}
+.active-btn {
+  background: #4a00ff !important;
+  color: white !important;
+  border: none !important;
+  transition: all 0.5s ease;
+}
+.inactive-btn {
+  background: #e4e4e7 !important;
+  color: #64748b !important;
+  border: none !important;
+  transition: all 0.5s ease;
+}
+.active-btn:hover {
+  background: #3407a7 !important;
+  color: white !important;
+  transform: translateY(-2px) scale(1.03);
+}
+.inactive-btn:hover {
+  background: #ceced1 !important;
+  color: #64748b !important;
+  transform: translateY(-2px) scale(1.03);
+}
+input[type="search"] {
+  background-image: url("./assets/mag.png");
+  background-repeat: no-repeat;
+  background-position: 10px 50%;
+  padding-left: 30px;
 }
