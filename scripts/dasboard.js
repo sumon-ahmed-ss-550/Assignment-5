@@ -175,12 +175,13 @@ const allIssueDisplay = (issue) => {
     // show modal on display
     if (cardDetails.status === "open") {
       card.className =
-        "hover:scale-102 hover:-translate-y-2 transition-all duration-400 cursor-pointer rounded-t-lg border-t-4 border-[#00A96E]";
+        "transition-all duration-400 cursor-pointer rounded-t-lg border-t-4 border-[#00A96E]";
     } else if (cardDetails.status === "closed") {
       card.className =
-        "hover:scale-102 hover:-translate-y-2 transition-all duration-400 cursor-pointer rounded-t-lg border-t-4 border-[#A855F7]";
+        "transition-all duration-400 cursor-pointer rounded-t-lg border-t-4 border-[#A855F7]";
     }
-
+    // hover:scale-102 hover:-translate-y-2
+    // hover:scale-102 hover:-translate-y-2
     const openClosedIcon = () => {
       if (cardDetails.status === "open") {
         return `<img src="./assets/Open-Status.png" alt="" class="w-full" />`;
