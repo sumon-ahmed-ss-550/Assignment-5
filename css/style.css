@@ -34,7 +34,7 @@ html {
   transform: translateY(-2px) scale(1.03);
 }
 input[type="search"] {
-  background-image: url("./assets/mag.png");
+  background-image: url("../assets/mag.png");
   background-repeat: no-repeat;
   background-position: 10px 50%;
   padding-left: 30px;
